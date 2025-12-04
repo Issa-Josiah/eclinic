@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .forms import SignupForm, LoginForm
 
-
 # -------------------------
 # SIGN UP VIEW
 # -------------------------
@@ -15,7 +14,9 @@ def signup_view(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
-            user = form.save()  # signup form already sets password + role
+            user = form.save(commit=False)  # signup form already sets password + role
+            user.save()
+            user._role = form.cleaned_data['role']
             messages.success(request, "Account created successfully!")
             return redirect('login')
 
@@ -62,7 +63,7 @@ def logout_view(request):
 # DASHBOARD REDIRECT BASED ON ROLE
 # -------------------------
 @login_required
-def dashboard_redirect_view(request):
+def dashboard_redirect(request):
     role = request.user.profile.role
 
     if role == "patient":

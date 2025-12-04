@@ -10,7 +10,9 @@ from patients.models import Patient
 def create_related_profile(sender, instance, created, **kwargs):
     if created:
         # Create Profile for every user
-        profile = Profile.objects.create(user=instance)
+         role = getattr(instance, '_role', None)
+         if role:
+            profile = Profile.objects.create(user=instance, role=role)
 
 @receiver(post_save, sender=Profile)
 def create_user_role_models(sender, instance, created, **kwargs):

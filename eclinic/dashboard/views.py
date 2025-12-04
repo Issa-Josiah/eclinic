@@ -13,15 +13,15 @@ User = get_user_model()
 
 @login_required
 def dashboard_redirect(request):
-    user = request.user
-
-    if user.role == "admin":
+    User.userprofile = request.user.profile
+    
+    if User.userprofile.role == "admin":
         return redirect("admin_dashboard")
 
-    elif user.role == "clinician":
+    elif User.userprofile.role == "clinician":
         return redirect("clinician_dashboard")
 
-    elif user.role == "patient":
+    elif User.userprofile.role == "patient":
         return redirect("patient_dashboard")
 
     else:

@@ -11,7 +11,7 @@ class Clinician(models.Model):
         ('other', 'Other'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='clinician_profile') 
     specialization = models.CharField(max_length=50, choices=SPECIALIZATIONS , default='general')
     duty_status = models.BooleanField(default=False)
 
