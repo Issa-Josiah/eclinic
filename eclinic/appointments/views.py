@@ -29,9 +29,21 @@ def book_appointment(request):
 # List appointments for patient
 @patient_required
 def patient_appointments(request):
-    patient = Patient.objects.get(user=request.user)
-    appointments = Appointment.objects.filter(patient=patient)
-    return render(request, 'appointments/appointments_list.html', {'appointments': appointments})
+    try:
+        patient = Patient.objects.get(user=request.user)
+    except Patient.DoesNotExist:
+        patient = None
+
+    appointments = Appointment.objects.filter(patient=patient) if patient else []
+
+    context = {
+        'appointments': appointments,
+        'is_patient': bool(patient),
+        'is_clinician': hasattr(request.user, 'clinician'),
+
+    }
+
+    return render(request, 'appointments/appointments_list.html', context)
 
 # List appointments for clinician
 @clinician_required

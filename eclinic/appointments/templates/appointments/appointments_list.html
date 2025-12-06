@@ -8,9 +8,9 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            {% if user.clinician %}
+            {% if is_clinician %}
             <th>Patient</th>
-            {% elif user.patient %}
+            {% elif is_patient %}
             <th>Clinician</th>
             {% endif %}
             <th>Date</th>
