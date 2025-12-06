@@ -1,17 +1,9 @@
 env
-*.log
-*.pot
-*.pyc
 __pycache__/
 db.sqlite3
 db.sqlite3-journal
 
-# If you use migrations, keep them except __pycache__
-# But if you want to ignore *all* migrations (optional):
-# */migrations/*
-# !*/migrations/__init__.py
-
-# Media uploads (optional)
+# Media files
 media/
 uploads/
 
@@ -19,16 +11,12 @@ uploads/
 staticfiles/
 static/
 node_modules/
-
-# =========================================
-# Environment & Security
-# =========================================
+# Environment variables
 .env
 *.env
 env/
 venv/
 .venv/
-# Python
 *.py[cod]
 *$py.class
 
@@ -46,10 +34,3 @@ lib64/
 parts/
 sdist/
 var/
-*.egg-info/
-.installed.cfg
-*.egg
-pip-log.txt
-pip-delete-this-directory.txt
-*.bak
-*.swp

@@ -8,9 +8,9 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            {% if user.userprofile.role == 'clinician' %}
+            {% if user.clinician %}
             <th>Patient</th>
-            {% elif user.userprofile.role == 'patient' %}
+            {% elif user.patient %}
             <th>Clinician</th>
             {% endif %}
             <th>Date</th>
@@ -22,9 +22,9 @@
     <tbody>
         {% for appt in appointments %}
         <tr>
-            {% if user.userprofile.role == 'clinician' %}
+            {% if user.clinician %}
             <td>{{ appt.patient.full_name }}</td>
-            {% elif user.userprofile.role == 'patient' %}
+            {% elif user.patient %}
             <td>{{ appt.clinician.full_name }}</td>
             {% endif %}
             <td>{{ appt.date }}</td>
@@ -39,7 +39,7 @@
 <p>No appointments found.</p>
 {% endif %}
 
-{% if user.userprofile.role == 'patient' %}
+{% if user.patient %}
 <a href="{% url 'book_appointment' %}" class="btn btn-success mt-3">Book New Appointment</a>
 {% endif %}
 

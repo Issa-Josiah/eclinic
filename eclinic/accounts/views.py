@@ -83,6 +83,9 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+def home(request):
+    return render(request, 'accounts/home.html')
+
 # Logout View
 @login_required
 def logout_view(request):
