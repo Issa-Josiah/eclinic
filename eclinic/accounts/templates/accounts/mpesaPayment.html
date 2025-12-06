@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Choose Role - eClinic Connect{% endblock %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="phone_number" class="form-label">Enter Mpesa number</label>
+    <input type="phone_number" class="form-control" id="phone_number" name="phone_number" aria-describedby="phoneHelp">
+    <div id="phoneHelp" class="form-text">We'll be grateful. Just pay.</div>
+  </div>
+  <div class="mb-3">
+    <label for="amount" class="form-label">Amount/Contribution</label>
+    <input type="number" class="form-control" id="amount" name="amount">
+  </div>
+  <button type="submit" class="btn btn-success">Make payment</button>
+</form>
+{% endblock %}
+

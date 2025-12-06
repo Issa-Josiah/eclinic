@@ -7,6 +7,20 @@ from patients.forms import PatientForm
 from patients.models import Patient
 from clinicians.models import Clinician
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse
+from django_daraja.mpesa.core import MpesaClient
+
+def index(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0708656009'
+    amount = 1
+    account_reference = 'eClinic Community'
+    transaction_desc = 'Donation towards eClinic'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
+
 
 # Choose Role Page (fallback if user has no role yet)
 @login_required
@@ -83,6 +97,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+# Home View
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -91,3 +106,19 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+#Mpesa Payment View
+@login_required
+def mpesaPayment(request):
+    if request.method == 'POST':
+        cl = MpesaClient()
+        phone_number = request.POST.get('phone_number')
+        amount = int(request.POST.get('amount'))
+        account_reference = 'eClinic Community'
+        transaction_desc = 'Payment towards eClinic services'
+        callback_url = 'https://api.darajambili.com/express-payment'
+        response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+        return HttpResponse(f"STK Push initiated. Response: {response}")
+    else:
+     return render(request, 'accounts/mpesaPayment.html')
+
