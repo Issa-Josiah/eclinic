@@ -4,8 +4,25 @@
 {% block content %}
 <h2>Welcome, {{ clinician.full_name }}</h2>
 <p>Specialization: {{ clinician.specialization }}</p>
-<p>Status: {{ clinician.duty_status }}</p>
+<p>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Current Status</h5>
+
+        <div class="badge 
+            {% if clinician.duty_status == 'ON' %}
+                bg-success
+            {% else %}
+                bg-success
+            {% endif %}
+        " width="100px" style="font-size: 1.2em; padding: 0.5em 1em;">
+            {{ clinician.get_duty_status_display }}
+        </div>
+    </div>
+</div>
+</p>
 <a href="{% url 'clinician_profile' %}" class="btn btn-outline-success mt-3">Edit Profile</a>
+
 
 <h3>Upcoming Appointments</h3>
 
