@@ -45,15 +45,88 @@
       </div>
     </div>
   </div>
-  <div class="card fw-semibold" style="width: 18rem;">
-   <div class="card-body">
-    <h5 class="card-title fw-bold">Save a Life</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">Impact Positively</h6>
-    <p class="card-text">Every contribution counts—join us in saving lives.Be the reason someone smiles tomorrow.</p>
-    <a href="#" class="btn btn-primary mb-2 w-100">Pay with Card</a>
-    <a href="mpesaPayment" class="btn btn-success w-100">Pay with Mobile Money</a>
-   </div>
- </div>
+</div>
+<style>
+/* Green Circle (Replaces Heart) */
+.save-life-circle {
+    position: fixed;
+    top: 5rem;
+    right: 3rem;
+    width: 8rem;
+    height: 8rem;
+    background-color: #28a745; /* Bootstrap bg-success green */
+    border-radius: 50%;       /* Makes it a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover animation */
+.save-life-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 128, 0, 0.4);
+}
+
+/* Pop-Up Card (Healthy Living Theme) */
+.save-life-card {
+    border-radius: 1rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #d0f0c0, #a8e6cf); /* soft healthy gradient */
+    color: #155724;
+    text-align: center;
+}
+
+.save-life-card h5 {
+    font-weight: bold;
+}
+
+.save-life-card h6 {
+    font-weight: 600;
+}
+
+.save-life-card p {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.save-life-card .btn {
+    flex: 1;
+}
+
+.save-life-card .btn + .btn {
+    margin-left: 0.5rem;
+}
+</style>
+
+<!-- Green Circle Button -->
+<div class="save-life-circle" data-bs-toggle="modal" data-bs-target="#saveLifeModal">
+    Save<br>a Life
+</div>
+
+<!-- Pop-Up Modal -->
+<div class="modal fade" id="saveLifeModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg save-life-card">
+
+      <h5>Save a Life</h5>
+      <h6>Impact Positively</h6>
+      <p>Your kindness can change someone's story today. Take the step!</p>
+
+      <div class="d-flex gap-2">
+          <a href="#" class="btn btn-success text-white">Pay with Card</a>
+          <a href="mpesaPayment" class="btn btn-success text-white">Pay with Mobile Money</a>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}
