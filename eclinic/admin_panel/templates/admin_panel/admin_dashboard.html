@@ -4,65 +4,64 @@
 
 <h2 class="mb-4 text-success fw-bold">Admin Dashboard</h2>
 
-<div class="row g-4">
+<div class="row g-4 mb-4">
     <div class="col-md-3">
-        <div class="card shadow-sm p-3 bg-light">
+        <div class="card shadow-sm p-3 bg-light mb-3">
             <h5>Total Patients</h5>
             <h2 class="text-success">{{ total_patients }}</h2>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card shadow-sm p-3 bg-light">
+        <div class="card shadow-sm p-3 bg-light mb-3">
             <h5>Total Clinicians</h5>
             <h2 class="text-success">{{ total_clinicians }}</h2>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card shadow-sm p-3 bg-light">
+        <div class="card shadow-sm p-3 bg-light mb-3">
             <h5>Total Appointments</h5>
             <h2 class="text-success">{{ total_appointments }}</h2>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card shadow-sm p-3 bg-light">
-            <h5>Pending</h5>
+        <div class="card shadow-sm p-3 bg-light mb-3">
+            <h5>Pending Appointments</h5>
             <h2 class="text-success">{{ active_appointments }}</h2>
         </div>
     </div>
 </div>
 
-<h2 class="fw-bold mb-4 text-success p-3">Management Sections</h2>
+<h2 class="fw-bold mb-4 text-success">Management Sections</h2>
 
-    <div class="row g-4">
+<div class="row g-4">
 
-        <div class="col-md-4 mb-3">
-            <a href="{% url 'manage_patients' %}" class="text-decoration-none">
-                <div class="card shadow-sm p-3 text-center border-primary">
-                    <h5>Manage Patients</h5>
-                    <p class="text-muted">View, add, edit or delete patient records</p>
-                </div>
-            </a>
-        </div>
-        
-        <div class="col-md-4 mb-3">
-            <a href="{% url 'manage_clinicians' %}" class="text-decoration-none">
-                <div class="card shadow-sm p-3 text-center border-success">
-                    <h5>Manage Clinicians</h5>
-                    <p class="text-muted">Update clinician profiles, specialization, duty status</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <a href="{% url 'manage_appointments' %}" class="text-decoration-none">
-                <div class="card shadow-sm p-3 text-center border-warning">
-                    <h5>Manage Appointments</h5>
-                    <p class="text-muted">Monitor and update appointment details</p>
-                </div>
-            </a>
-        </div>
-
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'manage_patients' %}" class="text-decoration-none">
+            <div class="card shadow-sm p-3 text-center border-primary">
+                <h5>Manage Patients</h5>
+                <p class="text-muted">View, add, edit, or delete patient records</p>
+            </div>
+        </a>
     </div>
+
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'manage_clinicians' %}" class="text-decoration-none">
+            <div class="card shadow-sm p-3 text-center border-success">
+                <h5>Manage Clinicians</h5>
+                <p class="text-muted">Update clinician profiles, specialization, duty status</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'manage_appointments' %}" class="text-decoration-none">
+            <div class="card shadow-sm p-3 text-center border-warning">
+                <h5>Manage Appointments</h5>
+                <p class="text-muted">Monitor and update appointment details</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+
 {% endblock %}
-
-

@@ -1,11 +1,39 @@
 {% extends "base.html" %}
+
 {% block title %}Clinician Profile{% endblock %}
 
 {% block content %}
-<h2>Edit Clinician Profile</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save Changes</button>
-</form>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4 p-4">
+        <h3 class="mb-3 text-success">Clinician Profile</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                {{ form.full_name }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                {{ form.phone_number }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Specialization</label>
+                {{ form.specialization }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Duty Status</label>
+                {{ form.duty_status }}
+            </div>
+
+            <button class="btn btn-success w-100 mt-3" type="submit">
+                Save Profile
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}

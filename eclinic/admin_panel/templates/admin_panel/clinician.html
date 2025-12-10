@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_f.html" %}
 {% block title %}Clinicians Management{% endblock %}
 
 {% block content %}
@@ -22,21 +22,22 @@
             <td>{{ clinician.phone_number }}</td>
             <td>{{ clinician.specialization }}</td>
             <td>
-                <span class="badge 
-                    {% if clinician.duty_status == 'On Duty' %}
-                        bg-success
-                    {% else %}
-                        bg-secondary
-                    {% endif %}
-                ">
+                <span class="badge {% if clinician.duty_status == 'On Duty' %} bg-success {% else %} bg-secondary {% endif %}">
                     {{ clinician.duty_status }}
                 </span>
             </td>
             <td>
-                <a href="{% url 'update_clinician_status' clinician.id %}" class="btn btn-sm btn-warning">
+                <a href="{% url 'update_clinician_status' clinician.pk %}" class="btn btn-sm btn-warning">
                     Update Status
                 </a>
+                <a href="{% url 'edit_clinician' clinician.pk %}" class="btn btn-sm btn-primary">
+                    Edit
+                </a>
             </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">No clinicians found.</td>
         </tr>
         {% endfor %}
     </tbody>

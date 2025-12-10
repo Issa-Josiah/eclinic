@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_f.html" %}
 {% block title %}Patients Management{% endblock %}
 
 {% block content %}
@@ -21,11 +21,14 @@
             <td>{{ patient.phone_number }}</td>
             <td>{{ patient.age }}</td>
             <td>
-                <a href="#" class="btn btn-sm btn-success disabled">View (coming soon)</a>
+                <a href="{% url 'edit_patient' patient.pk %}" class="btn btn-sm btn-primary">Edit</a>
             </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center text-muted">No patients found.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
 {% endblock %}

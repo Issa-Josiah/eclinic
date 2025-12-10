@@ -17,7 +17,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Phone Number</label>
-                {{ form.phone }}
+                {{ form.phone_number }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                {{ form.age }}
             </div>
 
             <div class="mb-3">
@@ -28,6 +33,11 @@
             <div class="mb-3">
                 <label class="form-label">Emergency Contact</label>
                 {{ form.emergency_contact }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Medical History</label>
+                {{ form.medical_history }}
             </div>
 
             <button class="btn btn-success w-100 mt-3" type="submit">

@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container mt-5">
     <h2>Admin Dashboard</h2>
+    <p>Total Patients: {{ total_patients }} | Total Clinicians: {{ total_clinicians }} | Total Appointments: {{ total_appointments }} | Pending Appointments: {{ active_appointments }}</p>
 
     <hr>
     <h4>Clinicians</h4>
@@ -21,7 +22,7 @@
                 <td>{{ clinician.user.username }}</td>
                 <td>{{ clinician.get_specialization_display }}</td>
                 <td>
-                    {% if clinician.duty_status %}
+                    {% if clinician.duty_status == 'ON' %}
                         <span class="badge bg-success">On Duty</span>
                     {% else %}
                         <span class="badge bg-danger">Off Duty</span>
@@ -46,7 +47,7 @@
             {% for patient in patients %}
             <tr>
                 <td>{{ patient.user.username }}</td>
-                <td>{{ patient.user.get_full_name }}</td>
+                <td>{{ patient.full_name }}</td>
                 <td>{{ patient.user.email }}</td>
             </tr>
             {% endfor %}
@@ -67,8 +68,8 @@
         <tbody>
             {% for appointment in appointments %}
             <tr>
-                <td>{{ appointment.patient.user.username }}</td>
-                <td>{{ appointment.clinician.user.username }}</td>
+                <td>{{ appointment.patient.full_name }}</td>
+                <td>{{ appointment.clinician.full_name }}</td>
                 <td>{{ appointment.date }} {{ appointment.time }}</td>
                 <td>{{ appointment.status|title }}</td>
             </tr>

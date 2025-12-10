@@ -7,12 +7,13 @@ from appointments.models import Appointment
 
 from .forms import ClinicianForm, PatientForm, AppointmentForm
 
-# Create your views here.
-
+# Check if user is admin
 def is_admin(user):
-    return user.is_superuser  # you can change this later
+    return user.is_superuser
 
-
+# ----------------------
+# DASHBOARD
+# ----------------------
 @user_passes_test(is_admin)
 def admin_dashboard(request):
     context = {
@@ -23,7 +24,6 @@ def admin_dashboard(request):
     }
     return render(request, "admin_panel/admin_dashboard.html", context)
 
-
 # ----------------------
 # PATIENT MANAGEMENT
 # ----------------------
@@ -32,14 +32,6 @@ def manage_patients(request):
     patients = Patient.objects.all()
     return render(request, "admin_panel/patient.html", {"patients": patients})
 
-
-@user_passes_test(is_admin)
-def manage_appointments(request):
-    appointments = Appointment.objects.all().order_by("-date", "-time")
-    return render(request, "admin_panel/appointments.html", {"appointments": appointments})
-
-
-
 @user_passes_test(is_admin)
 def add_patient(request):
     form = PatientForm(request.POST or None)
@@ -47,7 +39,6 @@ def add_patient(request):
         form.save()
         return redirect("manage_patients")
     return render(request, "admin_panel/form.html", {"form": form, "title": "Add Patient"})
-
 
 @user_passes_test(is_admin)
 def edit_patient(request, pk):
@@ -58,7 +49,6 @@ def edit_patient(request, pk):
         return redirect("manage_patients")
     return render(request, "admin_panel/form.html", {"form": form, "title": "Edit Patient"})
 
-
 # ----------------------
 # CLINICIAN MANAGEMENT
 # ----------------------
@@ -67,16 +57,12 @@ def manage_clinicians(request):
     clinicians = Clinician.objects.all()
     return render(request, "admin_panel/clinician.html", {"clinicians": clinicians})
 
-
 @user_passes_test(is_admin)
 def update_clinician_status(request, pk):
     clinician = get_object_or_404(Clinician, pk=pk)
-    # Example toggle logic: switch between 'On Duty' and 'Off Duty'
     clinician.duty_status = 'Off Duty' if clinician.duty_status == 'On Duty' else 'On Duty'
     clinician.save()
     return redirect('manage_clinicians')
-
-
 
 @user_passes_test(is_admin)
 def add_clinician(request):
@@ -85,7 +71,6 @@ def add_clinician(request):
         form.save()
         return redirect("manage_clinicians")
     return render(request, "admin_panel/form.html", {"form": form, "title": "Add Clinician"})
-
 
 @user_passes_test(is_admin)
 def edit_clinician(request, pk):
@@ -96,7 +81,6 @@ def edit_clinician(request, pk):
         return redirect("manage_clinicians")
     return render(request, "admin_panel/form.html", {"form": form, "title": "Edit Clinician"})
 
-
 # ----------------------
 # APPOINTMENT MANAGEMENT
 # ----------------------
@@ -104,7 +88,6 @@ def edit_clinician(request, pk):
 def manage_appointments(request):
     appointments = Appointment.objects.all().order_by("-date", "-time")
     return render(request, "admin_panel/appointments.html", {"appointments": appointments})
-
 
 @user_passes_test(is_admin)
 def edit_appointment(request, pk):
@@ -114,4 +97,3 @@ def edit_appointment(request, pk):
         form.save()
         return redirect("manage_appointments")
     return render(request, "admin_panel/form.html", {"form": form, "title": "Edit Appointment"})
-

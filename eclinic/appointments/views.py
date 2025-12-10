@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect
-from django import forms
 from .models import Appointment
+from .forms import AppointmentForm
 from patients.models import Patient
 from clinicians.models import Clinician
 from accounts.decorators import patient_required, clinician_required
-from appointments.models import Appointment
-
-class AppointmentForm(forms.ModelForm):
-    class Meta:
-        model = Appointment
-        fields = ['clinician', 'date', 'time', 'reason']
 
 # Patient books an appointment
 @patient_required
@@ -40,7 +34,6 @@ def patient_appointments(request):
         'appointments': appointments,
         'is_patient': bool(patient),
         'is_clinician': hasattr(request.user, 'clinician'),
-
     }
 
     return render(request, 'appointments/appointments_list.html', context)
@@ -52,7 +45,7 @@ def clinician_appointments(request):
     appointments = Appointment.objects.filter(clinician=clinician)
     return render(request, 'appointments/appointments_list.html', {'appointments': appointments})
 
-
+# Dashboards
 @patient_required
 def patient_dashboard(request):
     patient = Patient.objects.get(user=request.user)
@@ -68,4 +61,3 @@ def clinician_dashboard(request):
     return render(request, 'dashboard/clinician_dashboard.html', {
         'appointments': appointments
     })
-
