@@ -1,27 +1,20 @@
 {% extends "base.html" %}
+{% block title %}Login - eClinic Connect{% endblock %}
 
 {% block content %}
 <div class="container mt-5" style="max-width: 450px;">
     <h2 class="text-center">Login</h2>
     <br>
 
-    {% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        Please check your username and password
+    </div>
     {% endif %}
 
     <form method="POST">
         {% csrf_token %}
-        
-        <div class="mb-3">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-
+        {{ form.as_p }}
         <button class="btn btn-primary w-100">Login</button>
     </form>
 
@@ -29,15 +22,13 @@
     <p class="text-center">
         Don't have an account?
         <div class="d-flex flex-column align-items-center mt-4">
-          <a href="{% url 'patient_signup' %}" class="btn btn-success btn-lg mb-3 w-50">
-             Sign up as Patient
-          </a>
-          <a href="{% url 'clinician_signup' %}" class="btn btn-success btn-lg w-50">
-             Sign up as Clinician
-          </a>
-         </div>
+            <a href="{% url 'patient_signup' %}" class="btn btn-success btn-lg mb-3 w-50">
+                Sign up as Patient
+            </a>
+            <a href="{% url 'clinician_signup' %}" class="btn btn-success btn-lg w-50">
+                Sign up as Clinician
+            </a>
+        </div>
     </p>
 </div>
 {% endblock %}
-
-

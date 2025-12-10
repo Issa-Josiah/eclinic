@@ -2,11 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("admin_dashboard", views.admin_dashboard, name="admin_dashboard"),
+    path("admin_dashboard/", views.admin_dashboard, name="admin_dashboard"),
 
     # PATIENTS
     path("patients/", views.manage_patients, name="manage_patients"),
-    path("manage/appointments/", views.manage_appointments, name="manage_appointments"),
     path("patients/add/", views.add_patient, name="add_patient"),
     path("patients/edit/<int:pk>/", views.edit_patient, name="edit_patient"),
 

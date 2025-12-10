@@ -1,11 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Patient Profile{% endblock %}
+{% block title %}Edit Patient Profile{% endblock %}
 
 {% block content %}
-<h2>Edit Patient Profile</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save Changes</button>
-</form>
+<div class="container mt-5">
+    <h2>Edit Patient Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success mt-2">Save Changes</button>
+    </form>
+</div>
 {% endblock %}

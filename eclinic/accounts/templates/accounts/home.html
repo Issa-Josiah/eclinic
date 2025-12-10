@@ -1,5 +1,7 @@
-{% extends "base.html" %} {% block title %}Welcome to eClinic Connect{% endblock%} {% block content %}
+{% extends "base.html" %}
+{% block title %}Welcome to eClinic Connect{% endblock %}
 
+{% block content %}
 <div class="container mt-5">
   <div class="text-center mb-5">
     <h1 class="display-5 fw-bold text-success">Welcome to eClinic Connect</h1>
@@ -19,8 +21,7 @@
           <h3 class="fw-semibold">Clinician</h3>
           <p class="text-muted mt-2">
             Doctors, nurses & medical specialists — register or update your
-            professional profile --to connect with patients in need of your
-            expertise.
+            professional profile to connect with patients in need of your expertise.
           </p>
           <a href="{% url 'login' %}" class="btn btn-success w-75 mt-3">
             Create / Update Profile
@@ -46,6 +47,7 @@
     </div>
   </div>
 </div>
+
 <style>
 /* Green Circle (Replaces Heart) */
 .save-life-circle {
@@ -54,8 +56,8 @@
     right: 3rem;
     width: 8rem;
     height: 8rem;
-    background-color: #28a745; /* Bootstrap bg-success green */
-    border-radius: 50%;       /* Makes it a circle */
+    background-color: #28a745;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,41 +71,24 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Hover animation */
 .save-life-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 10px 25px rgba(0, 128, 0, 0.4);
 }
 
-/* Pop-Up Card (Healthy Living Theme) */
 .save-life-card {
     border-radius: 1rem;
     padding: 2rem;
-    background: linear-gradient(135deg, #d0f0c0, #a8e6cf); /* soft healthy gradient */
+    background: linear-gradient(135deg, #d0f0c0, #a8e6cf);
     color: #155724;
     text-align: center;
 }
 
-.save-life-card h5 {
-    font-weight: bold;
-}
-
-.save-life-card h6 {
-    font-weight: 600;
-}
-
-.save-life-card p {
-    font-style: italic;
-    margin-bottom: 1.5rem;
-}
-
-.save-life-card .btn {
-    flex: 1;
-}
-
-.save-life-card .btn + .btn {
-    margin-left: 0.5rem;
-}
+.save-life-card h5 { font-weight: bold; }
+.save-life-card h6 { font-weight: 600; }
+.save-life-card p { font-style: italic; margin-bottom: 1.5rem; }
+.save-life-card .btn { flex: 1; }
+.save-life-card .btn + .btn { margin-left: 0.5rem; }
 </style>
 
 <!-- Green Circle Button -->
@@ -122,11 +107,11 @@
 
       <div class="d-flex gap-2">
           <a href="#" class="btn btn-success text-white">Pay with Card</a>
-          <a href="mpesaPayment" class="btn btn-success text-white">Pay with Mobile Money</a>
+
+          <a href="{% url 'mpesaPayment' %}" class="btn btn-success text-white">Pay with Mobile Money</a>
       </div>
 
     </div>
   </div>
 </div>
-
 {% endblock %}

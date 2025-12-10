@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_f.html" %}
 {% block title %}Appointments Management{% endblock %}
 
 {% block content %}
@@ -25,30 +25,22 @@
             <td>{{ appointment.time }}</td>
             <td>
                 <span class="badge 
-                    {% if appointment.status == 'Pending' %}
-                        bg-warning text-dark
-                    {% elif appointment.status == 'Confirmed' %}
-                        bg-primary
-                    {% elif appointment.status == 'Completed' %}
-                        bg-success
-                    {% elif appointment.status == 'Cancelled' %}
-                        bg-danger
-                    {% else %}
-                        bg-secondary
-                    {% endif %}">
-
+                    {% if appointment.status == 'Pending' %} bg-warning text-dark
+                    {% elif appointment.status == 'Confirmed' %} bg-primary
+                    {% elif appointment.status == 'Completed' %} bg-success
+                    {% elif appointment.status == 'Cancelled' %} bg-danger
+                    {% else %} bg-secondary {% endif %}">
                     {{ appointment.status }}
-                        
-                   </span>
+                </span>
             </td>
             <td>
-               <a href="{% url 'edit_appointment' appointment.pk %}" class="btn btn-sm btn-info">Update</a>
+                <a href="{% url 'edit_appointment' appointment.pk %}" class="btn btn-sm btn-info">Update</a>
             </td>
         </tr>
         {% empty %}
-          <tr>
-           <td colspan="6" class="text-center text-muted">No appointments found.</td>
-          </tr>
+        <tr>
+            <td colspan="6" class="text-center text-muted">No appointments found.</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

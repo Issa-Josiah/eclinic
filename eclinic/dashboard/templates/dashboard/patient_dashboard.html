@@ -1,0 +1,31 @@
+{% extends "base_f.html" %}
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ patient.full_name }}</h2>
+
+<h3>Upcoming Appointments</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Clinician</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reason</th>
+    </tr>
+
+    {% for appointment in appointments %}
+    <tr>
+        <td>{{ appointment.clinician.full_name }}</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.reason }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No upcoming appointments.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'patient_appointments' %}" class="btn btn-success mt-3">View All Appointments</a>
+{% endblock %}

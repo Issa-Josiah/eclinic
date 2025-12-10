@@ -1,46 +1,47 @@
-{% extends "base.html" %}
+{% extends "base_f.html" %}
 {% block title %}My Appointments{% endblock %}
 
 {% block content %}
-<h2>My Appointments</h2>
+<div class="container mt-5">
+    <h2>My Appointments</h2>
 
-{% if appointments %}
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            {% if is_clinician %}
-            <th>Patient</th>
-            {% elif is_patient %}
-            <th>Clinician</th>
-            {% endif %}
-            <th>Date</th>
-            <th>Time</th>
-            <th>Reason</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for appt in appointments %}
-        <tr>
-            {% if user.clinician %}
-            <td>{{ appt.patient.full_name }}</td>
-            {% elif user.patient %}
-            <td>{{ appt.clinician.full_name }}</td>
-            {% endif %}
-            <td>{{ appt.date }}</td>
-            <td>{{ appt.time }}</td>
-            <td>{{ appt.reason }}</td>
-            <td>{{ appt.status }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>No appointments found.</p>
-{% endif %}
+    {% if appointments %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                {% if is_clinician %}
+                <th>Patient</th>
+                {% elif is_patient %}
+                <th>Clinician</th>
+                {% endif %}
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                {% if is_clinician %}
+                <td>{{ appt.patient.user.get_full_name|default:appt.patient.user.username }}</td>
+                {% elif is_patient %}
+                <td>{{ appt.clinician.user.get_full_name|default:appt.clinician.user.username }}</td>
+                {% endif %}
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.time }}</td>
+                <td>{{ appt.reason }}</td>
+                <td>{{ appt.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No appointments found.</p>
+    {% endif %}
 
-{% if user.patient %}
-<a href="{% url 'book_appointment' %}" class="btn btn-success mt-3">Book New Appointment</a>
-{% endif %}
-
+    {% if is_patient %}
+    <a href="{% url 'book_appointment' %}" class="btn btn-success mt-3">Book New Appointment</a>
+    {% endif %}
+</div>
 {% endblock %}

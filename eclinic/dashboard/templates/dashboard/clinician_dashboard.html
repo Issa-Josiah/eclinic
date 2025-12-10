@@ -4,29 +4,27 @@
 {% block content %}
 <h2>Welcome, {{ clinician.full_name }}</h2>
 <p>Specialization: {{ clinician.specialization }}</p>
-<p>
-<div class="card shadow-sm">
+
+<div class="card shadow-sm mb-3">
     <div class="card-body">
         <h5 class="card-title mb-3">Current Status</h5>
+       <div class="badge
+    {% if clinician.duty_status == 'On Duty' %}
+        bg-success
+    {% else %}
+        bg-secondary
+    {% endif %}
+" style="font-size: 1.2em; padding: 0.5em 1em;">
+    {{ clinician.get_duty_status_display }}
+</div>
 
-        <div class="badge 
-            {% if clinician.duty_status == 'ON' %}
-                bg-success
-            {% else %}
-                bg-success
-            {% endif %}
-        " width="100px" style="font-size: 1.2em; padding: 0.5em 1em;">
-            {{ clinician.get_duty_status_display }}
-        </div>
     </div>
 </div>
-</p>
-<a href="{% url 'clinician_profile' %}" class="btn btn-outline-success mt-3">Edit Profile</a>
 
+<a href="{% url 'clinician_profile' %}" class="btn btn-outline-success mb-4">Edit Profile</a>
 
 <h3>Upcoming Appointments</h3>
-
-<table>
+<table class="table table-striped">
     <tr>
         <th>Patient</th>
         <th>Date</th>
@@ -43,18 +41,10 @@
     </tr>
     {% empty %}
     <tr>
-        <td colspan="4">No appointments scheduled.</td>
+        <td colspan="4">No upcoming appointments.</td>
     </tr>
     {% endfor %}
 </table>
 
-<br>
-
-<div class="d-flex flex-column align-items-center mt-4">
-    <a href="{% url 'clinician_appointments' %}" class="btn btn-success btn-lg mb-3 w-50">
-        View All Appointments
-    </a>
-</div>
-
-
+<a href="{% url 'clinician_appointments' %}" class="btn btn-success mt-3">View All Appointments</a>
 {% endblock %}

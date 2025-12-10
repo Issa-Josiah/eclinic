@@ -2,10 +2,12 @@
 {% block title %}Book Appointment{% endblock %}
 
 {% block content %}
-<h2>Book an Appointment</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Book</button>
-</form>
+<div class="container mt-5">
+    <h2>Book an Appointment</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success mt-2">Book Appointment</button>
+    </form>
+</div>
 {% endblock %}
